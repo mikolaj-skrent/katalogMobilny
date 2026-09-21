@@ -2,8 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="katalogMobilny.MainPage">
-
-    <ScrollView>
+    
+    <VerticalStackLayout Padding="16" x:Name="MainLayout">
+        <Label Text="Procesor" FontSize="12" FontAttributes="Bold"
+               TextColor="#00BBFF" HorizontalOptions="Center" Margin="0,20"/>
+        <Image
+    x:Name="procesor_image"
+    Source="procek.jpg"
+    HeightRequest="185"
+    Aspect="AspectFit"
+    SemanticProperties.Description="processor" />
+        <Label Text="Częstotliwość: 3.6 GHz" TextColor="Grey" />
+        <Label Text="Liczba rdzeni: 8" TextColor="Grey" />
+        <Label Text="Pobór mocy: 65W" TextColor="Grey" />
+        <Label Text="Cena: 899zł" TextColor="Grey" />
+        <Label x:Name="EtykietaWyniku" Text="Nic nie wybrano" />
+        <Button Text="Pokaż" Clicked="kliknieciePrzycisku"></Button>
+    </VerticalStackLayout>
+    
+    <!--
+     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
@@ -28,5 +46,5 @@
                 HorizontalOptions="Fill" Background="#FF0000" />
         </VerticalStackLayout>
     </ScrollView>
-
+-->
 </ContentPage>

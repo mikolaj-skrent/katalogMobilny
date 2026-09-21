@@ -9,18 +9,23 @@
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        private void kliknieciePrzycisku(object sender, EventArgs e)
         {
-            count++;
 
-            if (count == 1)
-                CounterLabel.Text = $"Clicked {count} time";
-            else
-                CounterLabel.Text = $"Clicked {count} times";
-            bot_image.Source = "lazerdim.jpg";
-
-            SemanticScreenReader.Announce(CounterLabel.Text);
         }
+
+        //private void OnCounterClicked(object? sender, EventArgs e)
+        //{
+        //    count++;
+
+        //    if (count == 1)
+        //        CounterLabel.Text = $"Clicked {count} time";
+        //    else
+        //        CounterLabel.Text = $"Clicked {count} times";
+        //    bot_image.Source = "lazerdim.jpg";
+
+        //    SemanticScreenReader.Announce(CounterLabel.Text);
+        //}
 
 
     }

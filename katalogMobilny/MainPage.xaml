@@ -6,13 +6,15 @@
     <VerticalStackLayout Padding="16" x:Name="MainLayout">
         <Label Text="Procesor" FontSize="12" FontAttributes="Bold"
                TextColor="#00BBFF" HorizontalOptions="Center" Margin="0,20"/>
+        
         <Image
     x:Name="procesor_image"
     Source="procek.jpg"
     HeightRequest="185"
     Aspect="AspectFit"
     SemanticProperties.Description="processor" />
-        <Label Text="Częstotliwość: 3.6 GHz" TextColor="Grey" />
+        
+       <Label Text="Częstotliwość: 3.6 GHz" TextColor="Grey" />
         <Label Text="Liczba rdzeni: 8" TextColor="Grey" />
         <Label Text="Pobór mocy: 65W" TextColor="Grey" />
         <Label Text="Cena: 899zł" TextColor="Grey" />
@@ -27,7 +29,7 @@
             Spacing="25">
             <Image
                 x:Name="bot_image"
-                Source="dotnet_bot.png"
+                Source="dotnet_bot.png"s
                 HeightRequest="185"
                 Aspect="AspectFit"
                 SemanticProperties.Description="dot net bot in a submarine number ten" />
@@ -47,4 +49,5 @@
         </VerticalStackLayout>
     </ScrollView>
 -->
+        
 </ContentPage>

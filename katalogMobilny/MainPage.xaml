@@ -2,10 +2,62 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="katalogMobilny.MainPage">
-    
+
+    <!-- całość zamykamy w znaczniku grid -->
+    <Grid>
+        <!-- definiujemy ile jest wierszy i kolumn -->
+        <Grid.RowDefinitions>
+            <!-- zdecydowaliśmy się na 5 wierszy -->
+            <RowDefinition Width="Auto" />
+            <!-- auto oznacza tyle ile musisz zeby zmieścić zawartość -->
+            <RowDefinition Height="Auto" />
+            <!-- * oznacza, że wiersz zajmie pozostałą dostępną przestrzeń -->
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <!-- zdecydowaliśmy się na 2 kolumny identycznej szerokości -->
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!-- po definicjach wierszy i kolumn możemy umieszczać elementy w gridzie -->
+        <!-- labelka w pierwszym wierszu i pierwszej kolumnie, zajmuje dwie kolumny -->
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Procesor" FontSize="12" FontAttributes="Bold" 
+            TextColor="#008BFF" HorizontalOptions="Center" Margin="0,20"/>
+        <!-- obrazek analogicznie drugi wiersz, zajmie dwie kolumny-->
+        <Image Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+               Source="procek.jpg" Aspect="AspectFit" />
+        <!-- labelka znowu na całą szerokość ale w trzecim wierszu -->
+        <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+               Text="Cena: 899 zł" TextColor="Gray" />
+        <!-- labelka z wynikiem skryptu -->
+        <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                x:Name="EtykietaWyniku" Text="Nic nie wybrano" />
+        <!-- UWAGA: zamiast horizontalstacklayout możemy użyć grid -->
+        <Button Grid.Row="5" Grid.Column="0" Text="Pokaż" Clicked="PokazClicked"/>
+        <Button Grid.Row="5" Grid.Column="1" Text="Ukryj"/>
+        
+        <FlexLayout.Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Wrap="Wrap" JustifyContent="Start" Padding="10">
+            <Button Text="Procesory" />
+            <Button Text="Płyty główne" />
+            <Button Text="Karty graficzne" />
+            <Button Text="Dyski SSD" />
+            <Button Text="Pamięć RAM" />
+            </FlexLayout>
+    </Grid>
+
+
+
+
+
+    <!-- <Grid>
+        
     <VerticalStackLayout Padding="16" x:Name="MainLayout">
         <Label Text="Procesor" FontSize="12" FontAttributes="Bold"
                TextColor="#00BBFF" HorizontalOptions="Center" Margin="0,20"/>
+        <RowDefinition
         
         <Image
     x:Name="procesor_image"
@@ -21,7 +73,8 @@
         <Label x:Name="EtykietaWyniku" Text="Nic nie wybrano" />
         <Button Text="Pokaż" Clicked="kliknieciePrzycisku"></Button>
     </VerticalStackLayout>
-    
+    </Grid> -->
+
     <!--
      <ScrollView>
         <VerticalStackLayout

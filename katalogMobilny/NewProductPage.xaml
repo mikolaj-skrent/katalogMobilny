@@ -79,13 +79,13 @@
             </Picker.ItemsSource>
         </Picker>
 
-        <Switch Grid.Row="5"
+        <Switch Grid.Row="6"
                 Grid.Column="0"
                 x:Name="AvailableSwitch"
                 HorizontalOptions="Start"
                 Toggled="AvailableSwitch_Toggled" />
 
-        <Label Grid.Row="5"
+        <Label Grid.Row="6"
                Grid.Column="1"
                x:Name="DostepnoscLabel"
                Text="Produkt niedostępny"

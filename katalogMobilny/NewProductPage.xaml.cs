@@ -9,6 +9,7 @@ public partial class NewProductPage : ContentPage
         InitializeComponent();
     }
 
+
     private void NazwaEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
         var liczbaZnakow = e.NewTextValue?.Length ?? 0;
@@ -40,7 +41,31 @@ public partial class NewProductPage : ContentPage
 
     private void NowyProdukt_Clicked(object sender, EventArgs e)
     {
-        licznik++;
-        EtykietaWyniku.Text = $"Kliknięto {licznik} razy";
+        if(!double.TryParse(CenaEntry.Text, out double cena))
+        {
+            EtykietaWyniku.Text = "Niepoprawna cena";
+            return;
+        }
+        if (!int.TryParse(IloscEntry.Text, out int ilosc))
+        {
+            EtykietaWyniku.Text = "Niepoprawna ilość";
+            return;
+        }
+
+        double wartosc = cena * ilosc;
+            string? nazwa = NazwaEntry.Text;
+        if(string.IsNullOrWhiteSpace(nazwa))
+        {
+            EtykietaWyniku.Text = "Nazwa nie może być pusta";
+            return;
+        }
+
+        if(KategoriaPicker.SelectedItem == null)
+        {
+            EtykietaWyniku.Text = "Wybierz kategorię";
+            return;
+        }
+
+        EtykietaWyniku.Text = $"Produkt: {nazwa}, Cena: {cena}, Ilość: {ilosc}, " + $" Kategoria: {KategoriaPicker.SelectedItem}, Wartość: {wartosc}";
     }
 }

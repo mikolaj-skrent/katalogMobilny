@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using katalogMobilny;
+using Microsoft.Extensions.Logging;
 
 namespace katalogMobilny
 {
@@ -21,7 +22,5 @@ namespace katalogMobilny
 
             return builder.Build();
         }
-
-
     }
 }

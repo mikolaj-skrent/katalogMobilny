@@ -41,7 +41,13 @@ public partial class NewProductPage : ContentPage
 
     private void NowyProdukt_Clicked(object sender, EventArgs e)
     {
-        if(!double.TryParse(CenaEntry.Text, out double cena))
+        if (!double.TryParse(CenaEntry.Text, out double cena))
+        {
+            EtykietaWyniku.Text = "Niepoprawna cena";
+            return;
+        }
+
+        if (cena < 0)
         {
             EtykietaWyniku.Text = "Niepoprawna cena";
             return;

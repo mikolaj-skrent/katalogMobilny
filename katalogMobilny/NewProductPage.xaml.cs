@@ -59,19 +59,51 @@ public partial class NewProductPage : ContentPage
         }
 
         double wartosc = cena * ilosc;
-            string? nazwa = NazwaEntry.Text;
-        if(string.IsNullOrWhiteSpace(nazwa))
+        string? nazwa = NazwaEntry.Text;
+        if (string.IsNullOrWhiteSpace(nazwa))
         {
             EtykietaWyniku.Text = "Nazwa nie może być pusta";
             return;
         }
 
-        if(KategoriaPicker.SelectedItem == null)
+        if (KategoriaPicker.SelectedItem == null)
         {
             EtykietaWyniku.Text = "Wybierz kategorię";
             return;
         }
 
-        EtykietaWyniku.Text = $"Produkt: {nazwa}, Cena: {cena}, Ilość: {ilosc}, " + $" Kategoria: {KategoriaPicker.SelectedItem}, Wartość: {wartosc}";
+        EtykietaWyniku.Text = $"Produkt: {nazwa}, Cena: {cena}, Ilość: {ilosc}, " + $" Kategoria:" +
+            $" {KategoriaPicker.SelectedItem}, Wartość: {wartosc}";
     }
+
+        private void CenaEntry_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        Entry s = (Entry)sender;
+
+        if (double.TryParse(s.Text,out double wartosc))
+        {
+            if(wartosc < 0)
+            {
+                s.BackgroundColor = Colors.Red;
+                return;
+            }
+            else
+            {
+                s.BackgroundColor = Colors.Green;
+            }
+
+        }
+
+        if (!double.TryParse(CenaEntry.Text, out double cena))
+        {
+            EtykietaWyniku.Text = "Niepoprawna cena";
+            return;
+        }
+        if (!int.TryParse(IloscEntry.Text, out int ilosc))
+        {
+            EtykietaWyniku.Text = "Niepoprawna ilość";
+            return;
+        }
+    }
+
 }

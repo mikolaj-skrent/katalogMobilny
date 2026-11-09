@@ -76,30 +76,28 @@ public partial class NewProductPage : ContentPage
             $" {KategoriaPicker.SelectedItem}, Wartość: {wartosc}";
     }
 
-        private void CenaEntry_TextChanged(object sender, TextChangedEventArgs e)
+    private void CenaEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
         Entry s = (Entry)sender;
 
-        if (double.TryParse(s.Text,out double wartosc))
+        if (double.TryParse(s.Text, out double wartosc))
         {
-            if(wartosc < 0)
-            {
-                s.BackgroundColor = Colors.Red;
-                return;
-            }
-            else
-            {
-                s.BackgroundColor = Colors.Green;
-            }
-
+            s.BackgroundColor = wartosc < 0
+                ? Colors.Red
+                : Colors.Green;
+        }
+        else
+        {
+            s.BackgroundColor = Colors.Red;
         }
 
-        if (!double.TryParse(CenaEntry.Text, out double cena))
+        if (!double.TryParse(CenaEntry.Text, out _))
         {
             EtykietaWyniku.Text = "Niepoprawna cena";
             return;
         }
-        if (!int.TryParse(IloscEntry.Text, out int ilosc))
+
+        if (!int.TryParse(IloscEntry.Text, out _))
         {
             EtykietaWyniku.Text = "Niepoprawna ilość";
             return;

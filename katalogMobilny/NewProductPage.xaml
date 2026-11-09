@@ -45,14 +45,15 @@
                Text="Cena" />
 
         <Entry Grid.Row="2"
-               Grid.Column="1"
-               x:Name="CenaEntry"
-               Placeholder="0"
-               Keyboard="Numeric" />
+       Grid.Column="1"
+       x:Name="CenaEntry"
+       Placeholder="0"
+       Keyboard="Numeric"
+       TextChanged="CenaEntry_TextChanged" />
 
         <Label Grid.Row="3"
-               Grid.Column="0"
-               Text="Ilość" />
+       Grid.Column="0"
+       Text="Ilość" />
 
         <Entry Grid.Row="3"
        Grid.Column="1"

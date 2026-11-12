@@ -1,3 +1,4 @@
+
 namespace katalogMobilny;
 
 public partial class NewProductPage : ContentPage
@@ -8,7 +9,6 @@ public partial class NewProductPage : ContentPage
     {
         InitializeComponent();
     }
-
 
     private void NazwaEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -30,8 +30,7 @@ public partial class NewProductPage : ContentPage
     }
 
     private void KategoriaPicker_SelectedIndexChanged(
-        object sender,
-        EventArgs e)
+        object sender, EventArgs e)
     {
         if (KategoriaPicker.SelectedItem is string kategoria)
         {
@@ -41,6 +40,12 @@ public partial class NewProductPage : ContentPage
 
     private void NowyProdukt_Clicked(object sender, EventArgs e)
     {
+        if (string.IsNullOrWhiteSpace(NazwaEntry.Text))
+        {
+            EtykietaWyniku.Text = "Nazwa nie może być pusta";
+            return;
+        }
+
         if (!double.TryParse(CenaEntry.Text, out double cena))
         {
             EtykietaWyniku.Text = "Niepoprawna cena";
@@ -49,20 +54,19 @@ public partial class NewProductPage : ContentPage
 
         if (cena < 0)
         {
-            EtykietaWyniku.Text = "Niepoprawna cena";
+            EtykietaWyniku.Text = "Cena nie może być ujemna";
             return;
         }
+
         if (!int.TryParse(IloscEntry.Text, out int ilosc))
         {
             EtykietaWyniku.Text = "Niepoprawna ilość";
             return;
         }
 
-        double wartosc = cena * ilosc;
-        string? nazwa = NazwaEntry.Text;
-        if (string.IsNullOrWhiteSpace(nazwa))
+        if (ilosc < 0)
         {
-            EtykietaWyniku.Text = "Nazwa nie może być pusta";
+            EtykietaWyniku.Text = "Ilość nie może być ujemna";
             return;
         }
 
@@ -72,19 +76,22 @@ public partial class NewProductPage : ContentPage
             return;
         }
 
-        EtykietaWyniku.Text = $"Produkt: {nazwa}, Cena: {cena}, Ilość: {ilosc}, " + $" Kategoria:" +
-            $" {KategoriaPicker.SelectedItem}, Wartość: {wartosc}";
+        double wartosc = cena * ilosc;
+        string nazwa = NazwaEntry.Text;
+
+        EtykietaWyniku.Text =
+            $"Produkt: {nazwa}, Cena: {cena}, Ilość: {ilosc}, " +
+            $"Kategoria: {KategoriaPicker.SelectedItem}, " +
+            $"Wartość: {wartosc}";
     }
 
     private void CenaEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
         Entry s = (Entry)sender;
 
-        if (double.TryParse(s.Text, out double wartosc))
+        if (double.TryParse(s.Text, out double wartosc) && wartosc >= 0)
         {
-            s.BackgroundColor = wartosc < 0
-                ? Colors.Red
-                : Colors.Green;
+            s.BackgroundColor = Colors.Green;
         }
         else
         {
@@ -96,12 +103,10 @@ public partial class NewProductPage : ContentPage
             EtykietaWyniku.Text = "Niepoprawna cena";
             return;
         }
-
-        if (!int.TryParse(IloscEntry.Text, out _))
-        {
-            EtykietaWyniku.Text = "Niepoprawna ilość";
-            return;
-        }
     }
 
+    private async void Powrot_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//MainPage");
+    }
 }

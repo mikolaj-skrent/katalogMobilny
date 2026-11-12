@@ -1,4 +1,5 @@
-﻿namespace katalogMobilny
+﻿
+namespace katalogMobilny
 {
     public partial class MainPage : ContentPage
     {
@@ -7,24 +8,17 @@
         public MainPage()
         {
             InitializeComponent();
-            //alternatywne tworzenie elementów interfejsu zamiast
-            //xamla - tego nie robimy!
-            //Label etykieta = new Label();
-            //etykieta.Text = "Procesor";
-            //etykieta.Parent = MainLayout;
         }
 
         private void PokazClicked(object sender, EventArgs e)
         {
+            EtykietaWyniku.IsVisible = true;
             EtykietaWyniku.Text = "Wybrano procesor";
         }
 
-        /*
-        private void CounterBtn_Clicked(object sender, EventArgs e)
+        private void UkryjClicked(object sender, EventArgs e)
         {
-            count++;
-            EtykietaPowitania.Text = $"Kliknięto {count} razy";
+            EtykietaWyniku.IsVisible = false;
         }
-        */
     }
 }

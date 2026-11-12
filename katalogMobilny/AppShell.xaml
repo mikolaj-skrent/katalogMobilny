@@ -7,7 +7,13 @@
     Title="katalogMobilny">
 
     <ShellContent
-        Title="NewProductPage"
+        Title="Strona główna"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Nowy produkt"
         ContentTemplate="{DataTemplate local:NewProductPage}"
         Route="NewProductPage" />
+
 </Shell>

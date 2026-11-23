@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="KatalogMobilny.AppShell"
+    x:Class="katalogMobilny.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:KatalogMobilny"
+    xmlns:local="clr-namespace:katalogMobilny"
     Title="KatalogMobilny">
     <!--tu zmieniamy sobie strone na inna dopoki nie mamy nawigacji-->
     <ShellContent
-        Title="KatalogMobilny"
-        ContentTemplate="{DataTemplate local:NewProductPage}" 
+        Title="katalogMobilny"
+        ContentTemplate="{DataTemplate local:ProductListPage}" 
         Route="MainPage" />
 
 </Shell>

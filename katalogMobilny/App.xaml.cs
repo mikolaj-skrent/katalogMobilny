@@ -1,16 +1,18 @@
-﻿using KatalogMobilny;
+﻿using katalogMobilny;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace katalogMobilny;
-
-public partial class App : Application
+namespace katalogMobilny
 {
-    public App()
+    public partial class App : Application
     {
-        InitializeComponent();
-    }
+        public App()
+        {
+            InitializeComponent();
+        }
 
-    protected override Window CreateWindow(IActivationState? activationState)
-    {
-        return new Window(new AppShell());
+        protected override Window CreateWindow(IActivationState? activationState)
+        {
+            return new Window(new AppShell());
+        }
     }
 }

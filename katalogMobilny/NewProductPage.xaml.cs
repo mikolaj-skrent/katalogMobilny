@@ -1,112 +1,113 @@
-
 namespace katalogMobilny;
 
 public partial class NewProductPage : ContentPage
 {
-    private int licznik;
-
+    private int licznik = 0;
     public NewProductPage()
     {
         InitializeComponent();
     }
 
-    private void NazwaEntry_TextChanged(object sender, TextChangedEventArgs e)
+    private void NowyProdukt_Clicked(object sender, EventArgs e)
     {
-        var liczbaZnakow = e.NewTextValue?.Length ?? 0;
-        EtykietaWyniku.Text = $"Nazwa ma {liczbaZnakow} znaków";
+        //licznik++;
+        //EtykietaWyniku.Text = $"Kliknięto {licznik} razy";
+        //czytamy: jeżeli tryparse nie uda się odczytać ceny
+        if (!double.TryParse(CenaEntry.Text, out double cena))
+        {
+            EtykietaWyniku.Text = "Niepoprawna cena!"; //wyświetlamy komunikat o błędzie
+            return; //wychodzimy z metody, nie wykonujemy dalszych instrukcji
+        }
+        if (!int.TryParse(IloscEntry.Text, out int ilosc))
+        {
+            EtykietaWyniku.Text = "Niepoprawna ilość!"; //wyświetlamy komunikat o błędzie
+            return; //wychodzimy z metody, nie wykonujemy dalszych instrukcji
+        }
+        if (cena < 0 || ilosc < 0)
+        {
+            EtykietaWyniku.Text = "Cena i ilość nie mogą być ujemne!"; //wyświetlamy komunikat o błędzie
+            return; //wychodzimy z metody, nie wykonujemy dalszych instrukcji
+        }
+        //jeśli doszlimy tutaj to znaczy, że poprawnie odczytaliśmy cenę i ilość
+        double wartosc = cena * ilosc;
+        //teraz sprawdzamy nazwę produktu - nie może być pusta ani składać się tylko z białych znaków
+        string? nazwa = NazwaEntry.Text;
+        if (string.IsNullOrWhiteSpace(nazwa))
+        {
+            EtykietaWyniku.Text = "Niepoprawna nazwa!"; //wyświetlamy komunikat o błędzie
+            return; //wychodzimy z metody, nie wykonujemy dalszych instrukcji
+        }
+        //na koniec sprawdzamy czy wybrano kategorię
+        if (KategoriaPicker.SelectedItem == null)
+        {
+            EtykietaWyniku.Text = "Nie wybrano kategorii!"; //wyświetlamy komunikat o błędzie
+            return; //wychodzimy z metody, nie wykonujemy dalszych instrukcji
+        }
+        //wszystko sprawdzone - wyswietlamy wynik
+        EtykietaWyniku.Text = $"Produkt: {nazwa}, cena: {cena}, ilość: {ilosc}, " +
+            $"kategoria: {KategoriaPicker.SelectedItem}, wartość: {wartosc}";
     }
 
-    private void NazwaEntry_Completed(object sender, EventArgs e)
+    private void NazwaEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var liczbaZnakow = NazwaEntry.Text?.Length ?? 0;
-        EtykietaWyniku.Text = $"Nazwa ma {liczbaZnakow} znaków";
+        string tekst = NazwaEntry.Text;
+        int iloscZnakow = tekst.Length;
+        EtykietaWyniku.Text = $"Nazwa ma {iloscZnakow} znaków";
+    }
+    //TODO: oprogramuj drugi guzik w taki sposób żeby resetował licznik i wyświetlał w etykiecie "Kliknięto 0 razy"
+    private void Reset_Clicked(object sender, EventArgs e)
+    {
+        licznik = 0;
+        EtykietaWyniku.Text = $"Kliknięto {licznik} razy";
     }
 
     private void AvailableSwitch_Toggled(object sender, ToggledEventArgs e)
     {
-        DostepnoscLabel.Text = e.Value
-            ? "Produkt dostępny"
-            : "Produkt niedostępny";
-    }
-
-    private void KategoriaPicker_SelectedIndexChanged(
-        object sender, EventArgs e)
-    {
-        if (KategoriaPicker.SelectedItem is string kategoria)
+        if (AvailableSwitch.IsToggled)
         {
-            EtykietaWyniku.Text = $"Kategoria: {kategoria}";
+            AvailableLabel.Text = "Produkt jest dostępny";
+        }
+        else
+        {
+            AvailableLabel.Text = "Produkt jest niedostępny";
         }
     }
 
-    private void NowyProdukt_Clicked(object sender, EventArgs e)
+    private void KategoriaPicker_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(NazwaEntry.Text))
-        {
-            EtykietaWyniku.Text = "Nazwa nie może być pusta";
-            return;
-        }
-
-        if (!double.TryParse(CenaEntry.Text, out double cena))
-        {
-            EtykietaWyniku.Text = "Niepoprawna cena";
-            return;
-        }
-
-        if (cena < 0)
-        {
-            EtykietaWyniku.Text = "Cena nie może być ujemna";
-            return;
-        }
-
-        if (!int.TryParse(IloscEntry.Text, out int ilosc))
-        {
-            EtykietaWyniku.Text = "Niepoprawna ilość";
-            return;
-        }
-
-        if (ilosc < 0)
-        {
-            EtykietaWyniku.Text = "Ilość nie może być ujemna";
-            return;
-        }
-
-        if (KategoriaPicker.SelectedItem == null)
-        {
-            EtykietaWyniku.Text = "Wybierz kategorię";
-            return;
-        }
-
-        double wartosc = cena * ilosc;
-        string nazwa = NazwaEntry.Text;
-
-        EtykietaWyniku.Text =
-            $"Produkt: {nazwa}, Cena: {cena}, Ilość: {ilosc}, " +
-            $"Kategoria: {KategoriaPicker.SelectedItem}, " +
-            $"Wartość: {wartosc}";
+        EtykietaWyniku.Text = $"Wybrano kategorię: {KategoriaPicker.SelectedItem}";
     }
 
     private void CenaEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
+        //jeśli chcielibyście wiedzieć który elementy wysłał zdarzenie
         Entry s = (Entry)sender;
-
-        if (double.TryParse(s.Text, out double wartosc) && wartosc >= 0)
+        if (double.TryParse(s.Text, out double wartosc))
         {
-            s.BackgroundColor = Colors.Green;
+            //nie wiem czy to cena czy ilosc ale sprawdze czy jest ujemna
+            if (wartosc < 0)
+            {
+                //jeżeli jest ujemna to podświetle na czerwono
+                s.BackgroundColor = Colors.Red;
+                return;
+            }
+            else
+            {
+                //jeżeli jest dodatnia to podświetle na zielono
+                s.BackgroundColor = Colors.Green;
+            }
         }
-        else
-        {
-            s.BackgroundColor = Colors.Red;
-        }
 
-        if (!double.TryParse(CenaEntry.Text, out _))
+        if (!double.TryParse(CenaEntry.Text, out double cena))
         {
-            EtykietaWyniku.Text = "Niepoprawna cena";
+            EtykietaWartosc.Text = $"Niepoprawna cena!";
             return;
         }
-    }
-
-    private async void Powrot_Clicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//MainPage");
+        if (!int.TryParse(IloscEntry.Text, out int ilosc))
+        {
+            EtykietaWartosc.Text = $"Niepoprawna ilość!";
+            return;
+        }
+        EtykietaWartosc.Text = $"Wartość produktu: {cena * ilosc}";
     }
 }

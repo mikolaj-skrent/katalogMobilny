@@ -1,4 +1,4 @@
-﻿namespace katalogMobilny
+﻿namespace KatalogMobilny
 {
     public partial class AppShell : Shell
     {

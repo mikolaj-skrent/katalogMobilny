@@ -1,7 +1,4 @@
-﻿using Microsoft.Maui;
-using Microsoft.Maui.Hosting;
-
-namespace katalogMobilny.WinUI;
+﻿namespace katalogMobilny.WinUI;
 
 public partial class App : MauiWinUIApplication
 {
@@ -10,8 +7,6 @@ public partial class App : MauiWinUIApplication
         InitializeComponent();
     }
 
-    protected override MauiApp CreateMauiApp()
-    {
-        return MauiProgram.CreateMauiApp();
-    }
+    protected override MauiApp CreateMauiApp() =>
+        MauiProgram.CreateMauiApp();
 }
